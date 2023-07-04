@@ -23,6 +23,7 @@ sourceCompatibility = '11'
 apply plugin: 'pl.allegro.tech.build.axion-release'
 apply plugin: "se.bjurr.gitchangelog.git-changelog-gradle-plugin"
 
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor

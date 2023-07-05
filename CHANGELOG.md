@@ -5,6 +5,30 @@
 
 Changelog of Git Changelog Maven plugin.
 
+## v1.0.3
+### No issue
+
+[b01925ad97f4fec](https://github.com/tomasbjerre/git-changelog-maven-plugin/commit/b01925ad97f4fec) dev-sincerity *2023-07-05 10:05:46*
+
+fix: 45
+
+
+## v1.0.3-alpha
+### No issue
+
+[d5e1081ed9e130c](https://github.com/tomasbjerre/git-changelog-maven-plugin/commit/d5e1081ed9e130c) dev-sincerity *2023-07-05 09:51:14*
+
+fix: 1234
+
+
+## v1.0.2-alpha
+### No issue
+
+[f287ef37eec1027](https://github.com/tomasbjerre/git-changelog-maven-plugin/commit/f287ef37eec1027) dev-sincerity *2023-07-05 09:48:52*
+
+fix: 1012
+
+
 ## v1.0.0-alpha
 ### No issue
 

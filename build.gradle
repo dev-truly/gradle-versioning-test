@@ -24,6 +24,13 @@ sourceCompatibility = '11'
 apply plugin: 'pl.allegro.tech.build.axion-release'
 apply plugin: "se.bjurr.gitchangelog.git-changelog-gradle-plugin"
 
+scmVersion {
+    nextVersion {
+        suffix.set("alpha")
+        separator.set("-")
+    }
+}
+
 task versionInfoSet {
     doLast {
         def curVersion = version

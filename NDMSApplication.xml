@@ -4,8 +4,8 @@
     <name>NDMSApplication</name>
     <description>NDMSApplication Windows Service</description>
     <executable>C:\DEV\was_safety_back\OpenJDK\jdk-11\bin\java</executable>
-    <arguments>-jar -Dfile.encoding=UTF-8 -Dspring.profiles.active=dev -Djava.net.preferIPv4Stack=true "C:\DEV\was_safety_ndms\NDMSApplication-0.1.4-SNAPSHOT.jar"</arguments>
-    <env name="arg1" value="0.1.4-SNAPSHOT" />
+    <arguments>-jar -Dfile.encoding=UTF-8 -Dspring.profiles.active=dev -Djava.net.preferIPv4Stack=true "C:\DEV\was_safety_ndms\NDMSApplication-0.1.5.jar"</arguments>
+    <env name="arg1" value="0.1.5" />
     <logmode>none</logmode>
     <logpath>%BASE%\logs\</logpath>
 </service>

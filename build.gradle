@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath("gradle.plugin.se.bjurr.gitchangelog:git-changelog-gradle-plugin:1.79.0")
+
     }
 }
 
@@ -23,6 +24,71 @@ sourceCompatibility = '11'
 apply plugin: 'pl.allegro.tech.build.axion-release'
 apply plugin: "se.bjurr.gitchangelog.git-changelog-gradle-plugin"
 
+task versionInfoSet {
+    doLast {
+        def curVersion = version
+        def xmlContent =
+                """<?xml version="1.0" encoding="UTF-8"?>
+<service>
+    <id>NDMSApplication</id>
+    <name>NDMSApplication</name>
+    <description>NDMSApplication Windows Service</description>
+    <executable>C:\\DEV\\was_safety_back\\OpenJDK\\jdk-11\\bin\\java</executable>
+    <arguments>-jar -Dfile.encoding=UTF-8 -Dspring.profiles.active={mode}-{selected_code} -Djava.net.preferIPv4Stack=true "C:\\DEV\\was_safety_ndms\\NDMSApplication-${curVersion}.jar"</arguments>
+    <env name="arg1" value="$curVersion" />
+    <logmode>none</logmode>
+    <logpath>%BASE%\\logs\\</logpath>
+</service>
+"""
+        new File('version.xml').text = xmlContent
+        new File('NDMSApplication.xml').text = xmlContent.replace('{mode}-{selected_code}', 'dev')
+    }
+}
+
+task generateGitChangelogInlineTemplate(type: se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask) {
+    fromRepo = this.getProject().getRootProject().getRootDir().getAbsolutePath();
+    file = new File("CHANGELOG.md");
+    timeZone = "Asia/Seoul"
+    templateContent = """
+# Changelog
+
+# Git Changelog Maven plugin changelog
+
+Changelog of Git Changelog Maven plugin.
+
+{{#tags}}
+## {{name}}
+ {{#issues}}
+  {{#hasLink}}
+### {{name}} [{{issue}}]({{link}}) {{title}}
+  {{/hasLink}}
+  {{^hasLink}}
+### {{name}}
+  {{/hasLink}}
+
+  {{#commits}}
+[{{hash}}](https://github.com/tomasbjerre/git-changelog-maven-plugin/commit/{{hash}}) {{authorName}} *{{commitTime}}*
+
+{{{message}}}
+
+  {{/commits}}
+
+ {{/issues}}
+{{/tags}}
+ """;
+}
+
+tasks.register("generateChangelogs") {
+    doLast { }
+}
+
+generateChangelogs.dependsOn {
+    tasks.findAll { task -> task.name.startsWith('generateGit') }
+}
+
+sourceSets {
+    main.java.srcDirs = ['src/main/java']
+}
 
 configurations {
     compileOnly {
